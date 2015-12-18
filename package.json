@@ -1,0 +1,16 @@
+{
+    "name": "ImageValidator",
+    "version": "0.0.1",
+    "description": "Image Validator",
+    "author": "Anthony FARAUT",
+    "dependencies": {
+        "socket.io": "0.9.16",
+        "express": "3.5.1",
+        "jade": "1.3.1",
+        "mongodb" : "2.0.49"
+    },
+    "engines": {
+        "node": "0.10.24",
+        "npm": "1.2.30"
+    }
+}

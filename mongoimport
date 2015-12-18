@@ -1,0 +1,1 @@
+mongoimport --collection Eval --type csv --headerline --db ImageDatasetEval results.csv

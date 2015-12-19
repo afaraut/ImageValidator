@@ -1,0 +1,20 @@
+#content {
+	width: 500px;
+    background-color: #fff;
+    border: 2px solid #edeeee;
+    border-radius: 3px;
+    margin: auto;
+    margin-top: 6%;
+    padding: 10px;
+}
+
+#image {
+	width: 500px;
+}
+
+#title {
+	margin: auto;
+    width: 500px;
+    color: #125688;
+    text-align: center;
+}

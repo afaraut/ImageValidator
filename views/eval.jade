@@ -5,13 +5,15 @@ html
     title Image Validator
     // fav icon
     // link(rel='shortcut icon', href='/images/favicon.ico')
-    // css
-    // <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
-    // link(rel='stylesheet', href='/css/app.css')
+    // css 
+    link(rel='stylesheet', href='/css/app.css')
     // script
     script(src='/js/socket.io.min.js')
   body#canvas
-    script(src='/js/appe.js')
+    script(src='/js/app.js')
+    #title
+        h1 Is this picture related to the topic ?
+        p (press the space key to say yes, and all other keys to say no)
     #content 
         img#image(src=uri)
         input#idimage(type="hidden" name="id" value=_id)

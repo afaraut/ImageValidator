@@ -22,12 +22,11 @@ app.get('/', function(req, res) {
         assert.equal(null, err);
         findElements(db, function(err, image) {
             assert.equal(null, err);
-            //console.log(image);
             if (image) {
                 res.render('eval', image);
-            } else {
-            //res.status(500).send(err);
-            }
+            } /*else {
+                res.status(500).send(err);
+            }*/
             res.end();
             db.close();
         });
@@ -39,42 +38,33 @@ io.sockets.on('connection', function (socket) {
         (function(dataa) {
             MongoClient.connect(settings.mongoDBURL, function(err, db) {
                 assert.equal(null, err);
-                updateElements(db, dataa.id, function() {
+                updateElements(db, dataa.id, dataa.value);
+                
+                findElements(db, function(err, image) {
+                    assert.equal(null, err);
+                    if (image) {
+                        socket.emit('newimage', { id: image._id, uri: image.uri});
+                    }
                     db.close();
                 });
             });
         })(data);
-        // --- 
-        MongoClient.connect(settings.mongoDBURL, function(err, db) {
-            assert.equal(null, err);
-            findElements(db, function(err, image) {
-                assert.equal(null, err);
-                //console.log(image);
-                if (image) {
-                    socket.emit('newimage', { id: image._id, uri: image.uri});
-                }
-                db.close();
-            });
-        });
     });
 });
 
 var findElements = function(db, callback) {
-    var cursor = db.collection('Eval').find({"gt": {$eq: ""}}).limit(1);
+    var cursor = db.collection(settings.collection_MongoDB).find({"gt": {$eq: ""}}).limit(1);
     cursor.each(function(err, doc) {
         assert.equal(err, null);
         callback(err,doc);
     });
 };
 
-var updateElements = function(db, ide, callback) {
-    db.collection('Eval').updateOne(
-        { '_id': ObjectID(ide)  },
+var updateElements = function(db, id, value) {
+    db.collection(settings.collection_MongoDB).updateOne(
+        { '_id': ObjectID(id)  },
         {
-            $set: { gt: 'oui' }
-        }, function(err, results) {
-            console.log("RESULTS " + results);
-            callback();
+            $set: { gt: value }
         }
     );
 };
